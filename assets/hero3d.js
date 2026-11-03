@@ -180,7 +180,8 @@ function start() {
     }
   }
   // with reduced motion nothing moves by itself, and the picture redraws only when someone turns it
-  controls.addEventListener("change", () => { if (stopped()) frame(); });
+  // (controls.update() has already run when "change" fires, so this draws without updating again)
+  controls.addEventListener("change", () => { if (stopped()) draw(); });
   function setMotion() {
     controls.enableDamping = !stopped();
     if (pauseButton) pauseButton.hidden = still.matches; // with reduced motion nothing moves, so there is nothing to pause
