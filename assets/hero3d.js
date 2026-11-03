@@ -153,7 +153,11 @@ function start() {
   let t = 0, last = performance.now(), visible = true, raf = 0;
   function frame() {
     if (!current) return;
-    controls.update();
+    controls.update(); // may fire "change", whose handler only draws, so the two never call each other
+    draw();
+  }
+  function draw() {
+    if (!current) return;
     current.update(t);
     composer.render();
   }
@@ -172,7 +176,8 @@ function start() {
     }
   }
   // with reduced motion nothing moves by itself, and the picture redraws only when someone turns it
-  controls.addEventListener("change", () => { if (stopped()) frame(); });
+  // (controls.update() has already run when "change" fires, so this draws without updating again)
+  controls.addEventListener("change", () => { if (stopped()) draw(); });
   function setMotion() {
     controls.enableDamping = !stopped();
     if (pauseButton) pauseButton.hidden = still.matches; // with reduced motion nothing moves, so there is nothing to pause
