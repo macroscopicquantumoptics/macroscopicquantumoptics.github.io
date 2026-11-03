@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-03T00:00:00Z",
+  "title": "Design System: Macroscopic Quantum Optics",
+  "extensions": {
+    "colorMeta": {
+      "school-of-science-yellow": { "role": "primary", "displayName": "School of Science Yellow", "canonical": "#F7E159", "tonalRamp": ["#3D3612", "#5E5420", "#857731", "#B09E40", "#D7C24D", "#F7E159", "#FAEC97", "#FDF7D6"] },
+      "paper-white": { "role": "neutral", "displayName": "Paper White", "canonical": "#FFFFFF", "tonalRamp": ["#262626", "#404040", "#595959", "#808080", "#A6A6A6", "#D9D9D9", "#F2F2F2", "#FFFFFF"] },
+      "ink-black": { "role": "neutral", "displayName": "Ink Black", "canonical": "#000000", "tonalRamp": ["#000000", "#141414", "#262626", "#333333", "#595959", "#808080", "#A6A6A6", "#D9D9D9"] },
+      "muted-grey": { "role": "neutral", "displayName": "Muted Grey (light mode)", "canonical": "#595959", "tonalRamp": ["#262626", "#333333", "#404040", "#595959", "#737373", "#8C8C8C", "#A6A6A6", "#BFBFBF"] },
+      "muted-grey-dark": { "role": "neutral", "displayName": "Muted Grey (dark mode)", "canonical": "#A6A6A6", "tonalRamp": ["#595959", "#737373", "#8C8C8C", "#A6A6A6", "#B3B3B3", "#BFBFBF", "#CCCCCC", "#D9D9D9"] },
+      "hairline": { "role": "neutral", "displayName": "Hairline (light mode)", "canonical": "#D9D9D9", "tonalRamp": ["#8C8C8C", "#A6A6A6", "#B3B3B3", "#BFBFBF", "#CCCCCC", "#D9D9D9", "#E6E6E6", "#F2F2F2"] },
+      "hairline-dark": { "role": "neutral", "displayName": "Hairline (dark mode)", "canonical": "#333333", "tonalRamp": ["#0D0D0D", "#141414", "#1A1A1A", "#262626", "#333333", "#404040", "#4D4D4D", "#595959"] },
+      "blank": { "role": "neutral", "displayName": "Blank (light mode)", "canonical": "#F2F2F2", "tonalRamp": ["#A6A6A6", "#BFBFBF", "#CCCCCC", "#D9D9D9", "#E6E6E6", "#F2F2F2", "#F7F7F7", "#FFFFFF"] },
+      "blank-dark": { "role": "neutral", "displayName": "Blank (dark mode)", "canonical": "#141414", "tonalRamp": ["#000000", "#0A0A0A", "#141414", "#1F1F1F", "#262626", "#333333", "#404040", "#4D4D4D"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Page title", "purpose": "One per page; Inter Bold, tracking -25." },
+      "headline": { "displayName": "Section title", "purpose": "Section titles and publication years." },
+      "title": { "displayName": "Item name", "purpose": "Names of people, news items, research directions; body size in bold." },
+      "body": { "displayName": "Body", "purpose": "Running text at most 64ch; dates, roles and authors in grey at the same size." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "switch-knob", "value": "transform .2s ease", "purpose": "Theme switch knob sliding between sun and moon; off with reduced motion." },
+      { "name": "hero-fade", "value": "opacity .8s ease", "purpose": "Home page 3D model fading in once drawn; off with reduced motion." },
+      { "name": "hero-tip", "value": "opacity .2s", "purpose": "Brief hint shown when the wheel scrolls over the home page picture." }
+    ],
+    "breakpoints": [
+      { "name": "phone", "value": "600px" },
+      { "name": "tablet", "value": "900px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Link",
+      "kind": "custom",
+      "refersTo": "link-hover",
+      "description": "Inline link: thin underline at rest, yellow highlight behind black text on hover.",
+      "html": "<p class=\"ds-text\">Read the <a class=\"ds-link\" href=\"#\">paper in PRL</a> for details.</p>",
+      "css": ".ds-text { font-family: Inter, Arial, sans-serif; font-size: 18px; line-height: 1.65; color: var(--fg, #000); } .ds-link { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; } .ds-link:hover { background: var(--accent, #F7E159); color: #000; text-decoration: none; } .ds-link:focus-visible { outline: 2px solid var(--fg, #000); outline-offset: 3px; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link-current",
+      "description": "Header navigation; the current page sits on School of Science Yellow, hover underlines.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">Home</a><a href=\"#\" aria-current=\"page\">Research</a><a href=\"#\">People</a><a href=\"#\">Publications</a><a href=\"#\">News</a></nav>",
+      "css": ".ds-nav { display: flex; flex-wrap: wrap; gap: 4px 36px; font-family: Inter, Arial, sans-serif; font-size: 18px; line-height: 1.65; } .ds-nav a { color: var(--fg, #000); text-decoration: none; } .ds-nav a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; } .ds-nav a[aria-current=\"page\"] { background: var(--accent, #F7E159); color: #000; padding: 0 .25em; margin: 0 -.25em; } .ds-nav a:focus-visible { outline: 2px solid var(--fg, #000); outline-offset: 3px; }"
+    },
+    {
+      "name": "Mark",
+      "kind": "custom",
+      "refersTo": "mark",
+      "description": "Highlight around a key phrase in running text.",
+      "html": "<p class=\"ds-text\">Polariton condensates that switch <mark class=\"ds-mark\">at room temperature</mark>.</p>",
+      "css": ".ds-text { font-family: Inter, Arial, sans-serif; font-size: 18px; line-height: 1.65; color: var(--fg, #000); } .ds-mark { background: var(--accent, #F7E159); color: #000; padding: 0 .12em; }"
+    },
+    {
+      "name": "News row",
+      "kind": "custom",
+      "refersTo": "list-row",
+      "description": "Hairline-separated list item: grey date, bold title, body text.",
+      "html": "<ul class=\"ds-rows\"><li><p class=\"ds-meta\">October 2026</p><h3 class=\"ds-title\">Item title in sentence case</h3><p class=\"ds-body\">One or two plain sentences on what happened.</p></li><li><p class=\"ds-meta\">September 2026</p><h3 class=\"ds-title\">Another item</h3><p class=\"ds-body\">Short description.</p></li></ul>",
+      "css": ".ds-rows { list-style: none; margin: 0; padding: 0; font-family: Inter, Arial, sans-serif; font-size: 18px; line-height: 1.65; color: var(--fg, #000); } .ds-rows > li { border-top: 1px solid var(--line, #D9D9D9); padding: 44px 0; } .ds-rows > li:last-child { border-bottom: 1px solid var(--line, #D9D9D9); } .ds-meta { color: var(--muted, #595959); margin: 0 0 10px; } .ds-title { font-size: 18px; line-height: 1.4; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 12px; } .ds-body { margin: 0; max-width: 64ch; }"
+    },
+    {
+      "name": "Publication",
+      "kind": "custom",
+      "refersTo": "list-row",
+      "description": "Bold linked title, then authors and journal on grey lines.",
+      "html": "<ul class=\"ds-pubs\"><li><a href=\"#\">Paper title as the link</a><p>A. Author, B. Author, C. Author</p><p>Journal 133, 186903 (2024)</p></li></ul>",
+      "css": ".ds-pubs { list-style: none; margin: 0; padding: 0; font-family: Inter, Arial, sans-serif; font-size: 18px; line-height: 1.65; } .ds-pubs > li { padding: 28px 0; border-top: 1px solid var(--line, #D9D9D9); } .ds-pubs a { display: inline-block; margin-bottom: 6px; font-weight: 700; color: var(--fg, #000); text-decoration: none; } .ds-pubs a:hover { background: var(--accent, #F7E159); color: #000; } .ds-pubs a:focus-visible { outline: 2px solid var(--fg, #000); outline-offset: 3px; } .ds-pubs p { margin: 0; color: var(--muted, #595959); }"
+    },
+    {
+      "name": "Bulleted list",
+      "kind": "custom",
+      "description": "Plain list indented further than its heading, small round black bullets.",
+      "html": "<ul class=\"ds-bullets\"><li>A CV</li><li>A transcript</li><li>A short note on which research direction interests you</li></ul>",
+      "css": ".ds-bullets { list-style: none; margin: 24px 0 0 28px; padding: 0; font-family: Inter, Arial, sans-serif; font-size: 18px; line-height: 1.65; color: var(--fg, #000); } .ds-bullets li { position: relative; padding-left: 4px; } .ds-bullets li + li { margin-top: 10px; } .ds-bullets li::before { content: \"\"; position: absolute; left: -20px; top: .62em; width: 7px; height: 7px; border-radius: 50%; background: var(--fg, #000); }"
+    },
+    {
+      "name": "Theme switch",
+      "kind": "button",
+      "refersTo": "theme-switch",
+      "description": "Light/dark toggle: outlined pill, yellow knob under the active icon.",
+      "html": "<button class=\"ds-switch\" role=\"switch\" aria-checked=\"false\" aria-label=\"Dark mode\"><svg class=\"ds-sun\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4\"/></svg><svg class=\"ds-moon\" viewBox=\"0 0 24 24\"><path d=\"M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z\"/></svg></button>",
+      "css": ".ds-switch { position: relative; display: flex; align-items: center; width: 72px; height: 36px; padding: 0; border: 1px solid var(--fg, #000); border-radius: 18px; background: var(--bg, #fff); cursor: pointer; } .ds-switch::before { content: \"\"; position: absolute; top: 3px; left: 3px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent, #F7E159); transition: transform .2s ease; } .ds-switch[aria-checked=\"true\"]::before { transform: translateX(36px); } .ds-switch svg { position: relative; width: 35px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; color: var(--muted, #595959); } .ds-switch[aria-checked=\"false\"] .ds-sun, .ds-switch[aria-checked=\"true\"] .ds-moon { color: #000; } .ds-switch:hover svg { color: var(--fg, #000); } .ds-switch:focus-visible { outline: 2px solid var(--fg, #000); outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Clear Lab Page",
+    "overview": "A clean lab group web page that is clear and informative, with one consistent theme on every page. The site follows the Aalto brand guidelines, the same rules as the group meeting slides, so the website, the slides and Aalto's own pages read as one family. Black type on white (white on black in dark mode), one typeface, three type sizes, and School of Science Yellow as the only colour.\n\nPages are lists of real things: research directions, people, papers, news, tools. Structure comes from white space, one left edge and 1px hairlines between items, never from boxes or decoration. The one exception is the home page picture: a dark band, in both themes, holding interactive 3D models of the group's own experiments, each linked to its paper.\n\nDensity is low and the measure is short (64ch). Nothing moves on its own except the home page models, and with reduced motion nothing does.",
+    "keyCharacteristics": [
+      "Black and white, with yellow only as a highlight.",
+      "Inter Bold headings with tight tracking; Inter Regular for everything else.",
+      "Three type sizes: page title, section title, body.",
+      "Flat: no cards, shadows, gradients, rounded corners, chips or icons on links.",
+      "One left edge; items separated by hairlines and white space.",
+      "Light and dark themes, switched in the lower right corner."
+    ],
+    "rules": [
+      { "name": "The Highlighter Rule", "body": "Yellow is a background behind black text, never a text colour, border or fill on its own. If it isn't marking \"you are here\", \"you're pointing at this\" or \"this phrase matters\", it isn't yellow.", "section": "colors" },
+      { "name": "The Token Rule", "body": "Colours come from the variables at the top of `assets/site.css` (`--bg`, `--fg`, `--muted`, `--accent`, `--line`, `--blank`), redefined for dark mode. Don't write raw hex in a rule, except black text on yellow and the always-dark home page picture.", "section": "colors" },
+      { "name": "The Three Sizes Rule", "body": "Page title, section title, body. No small print, captions or labels at a fourth size.", "section": "typography" },
+      { "name": "The Sentence Case Rule", "body": "Sentence case everywhere, no UPPER CASE, left-aligned, ragged right. Bold a person's name on its first mention in running text.", "section": "typography" },
+      { "name": "The Hairline Rule", "body": "If two things need separating, use 1px of `var(--line)` or more white space. Never a box, a tinted panel or a shadow.", "section": "elevation" }
+    ],
+    "dos": [
+      "**Do** use the CSS variables (`--bg`, `--fg`, `--muted`, `--accent`, `--line`, `--blank`) so both themes work.",
+      "**Do** separate list items with 1px `var(--line)` hairlines and white space.",
+      "**Do** keep every block on the one left edge, with body text at most 64ch wide.",
+      "**Do** use Muted Grey at body size for dates, roles, authors and captions.",
+      "**Do** check every change in light mode, dark mode and at phone width.",
+      "**Do** keep the Aalto logo whole: no cropping, recolouring (beyond the dark-mode inversion) or stretching."
+    ],
+    "donts": [
+      "**Don't** put yellow text on white, or use yellow anywhere other than as a highlight behind black text.",
+      "**Don't** add cards, boxes, shadows, gradients, rounded corners, chips, tags, or icons and arrows on links.",
+      "**Don't** add a fourth type size or set text smaller than body.",
+      "**Don't** use UPPER CASE, centred text or justified text.",
+      "**Don't** introduce a second typeface, a second accent colour or a CDN-loaded asset.",
+      "**Don't** make any area dark except the home page picture."
+    ]
+  }
+}
