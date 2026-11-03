@@ -149,7 +149,8 @@ main:has(> .hero) { padding-top: 40px; }
 
 /* news: text on the left, picture on the right */
 .news { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 72px; align-items: start; }
-.news h3 { margin-bottom: 12px; }
+/* items are h2 on the news page and h3 under "News" on the home page; both at title size */
+.news h2, .news h3 { font-size: 18px; line-height: 1.4; letter-spacing: -0.01em; margin-bottom: 12px; }
 .news p + p, .news .link { margin-top: 16px; }
 .news:not(:has(figure)) { grid-template-columns: minmax(0, 1fr); }
 .news figcaption { color: var(--muted); margin-top: 8px; }
@@ -249,7 +250,7 @@ main:has(> .hero) { padding-top: 40px; }
   .people { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 20px; }
   .year { grid-template-columns: 1fr; gap: 12px; }
   .year + .year { margin-top: 72px; }
-  h3, .site-foot h2 { font-size: 17px; }
+  h3, .site-foot h2, .news h2 { font-size: 17px; }
 }
 
 @media print {

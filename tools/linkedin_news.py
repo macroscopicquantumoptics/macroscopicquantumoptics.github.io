@@ -148,7 +148,7 @@ def main():
     item = f'''      <li class="news" id="{slug}">
         <div>
           <p class="meta">{d.day} {MONTHS[d.month - 1]} {d.year} · {html.escape(args.category)}</p>
-          <h3>{html.escape(title, quote=False)}</h3>
+          <h2>{html.escape(title, quote=False)}</h2>
 {body}
           <p class="link"><a href="{html.escape(args.url)}">On LinkedIn</a></p>
         </div>{figure}
@@ -168,6 +168,7 @@ def sync_home():
     out = []
     for it in items:
         it = re.sub(r'(src|href)="\.\./', r'\1="', it)
+        it = re.sub(r"<(/?)h2>", r"<\1h3>", it)  # under the home page's "News" heading
         out.append(re.sub(r"^", "      ", it, flags=re.M).rstrip(" ").replace(' id="', ' data-id="'))
     home_file = ROOT / "index.html"
     home = home_file.read_text()
