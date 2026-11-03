@@ -47,11 +47,8 @@ spacing:
   container: "1320px"
 components:
   nav-link-current:
-    backgroundColor: "{colors.school-of-science-yellow}"
     textColor: "{colors.ink-black}"
     typography: "{typography.body}"
-    rounded: "{rounded.none}"
-    padding: "0.2em 0.45em"
   link-hover:
     backgroundColor: "{colors.school-of-science-yellow}"
     textColor: "{colors.ink-black}"
@@ -98,7 +95,7 @@ Density is low and the measure is short (64ch). Nothing moves on its own except 
 Strictly monochrome, with one yellow used as a highlighter, never as text or decoration.
 
 ### Primary
-- **School of Science Yellow** (#F7E159): the Aalto School of Science colour and the only highlight. It marks the current nav item, the background of a hovered link, `<mark>` around a key phrase, the skip link, and the theme switch's knob. Text on yellow is always black, in both themes.
+- **School of Science Yellow** (#F7E159): the Aalto School of Science colour and the only highlight. It marks the background of a hovered link, `<mark>` around a key phrase, the skip link, and the theme switch's knob. Text on yellow is always black, in both themes.
 
 ### Neutral
 - **Paper White** (#FFFFFF): page background in light mode; text in dark mode and on the home page picture.
@@ -108,7 +105,7 @@ Strictly monochrome, with one yellow used as a highlighter, never as text or dec
 - **Blank** (#F2F2F2 light, #141414 dark): the empty portrait placeholder for a person with no photo yet.
 
 ### Named Rules
-**The Highlighter Rule.** Yellow is a background behind black text, never a text colour, border or fill on its own. If it isn't marking "you are here", "you're pointing at this" or "this phrase matters", it isn't yellow.
+**The Highlighter Rule.** Yellow is a background behind black text, never a text colour, border or fill on its own. If it isn't marking "you're pointing at this" or "this phrase matters", it isn't yellow. The current page in the nav is not yellow, so it never looks like a hovered link.
 
 **The Token Rule.** Colours come from the variables at the top of `assets/site.css` (`--bg`, `--fg`, `--muted`, `--accent`, `--line`, `--blank`), redefined for dark mode. Don't write raw hex in a rule, except black text on yellow and the always-dark home page picture.
 
@@ -163,8 +160,8 @@ Circles appear only where the form is a dot by nature: list bullets (7px), the m
 
 ### Navigation
 - **Style:** body-size Inter Regular, no underline, 36px gaps (20px on phones).
-- **Hover:** underline only, no yellow.
-- **Current page:** School of Science Yellow background behind black text (`aria-current="page"`).
+- **Hover:** 1px underline, no yellow.
+- **Current page:** 2px underline in the text colour (`aria-current="page"`), 0.3em below the text like the hover underline. Quieter than the page title, and different from link hover.
 - **Mobile:** wraps below the logo row under 900px.
 
 ### Lists (news, publications, research)

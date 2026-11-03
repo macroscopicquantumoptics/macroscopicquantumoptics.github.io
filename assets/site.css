@@ -72,9 +72,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--fg); outline-of
 }
 
 .nav { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 36px; padding-top: 4px; margin-left: auto; }
-.nav a { text-decoration: none; }
+.nav a { text-decoration: none; text-underline-offset: .3em; }
 .nav a:hover { text-decoration: underline; background: none; color: inherit; }
-.nav a[aria-current="page"] { background: var(--accent); color: #000; padding: .2em .45em; margin: 0 -.45em; } /* a highlighter block a little taller and wider than the word; the negative margin keeps the word where it was */
+/* current page: a 2px underline in the text colour; hover is the 1px underline. Yellow stays for link hover and <mark> */
+.nav a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 2px; }
 /* light/dark toggle, floating in the lower right: sun on the left, moon on the right, a yellow knob slides under the active one */
 .theme-switch { position: fixed; right: 24px; bottom: 24px; z-index: 20; display: flex; align-items: center;
   width: 72px; height: 36px; padding: 0; border: 1px solid var(--fg); border-radius: 18px; background: var(--bg); cursor: pointer; }

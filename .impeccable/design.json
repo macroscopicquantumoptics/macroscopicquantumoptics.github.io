@@ -44,9 +44,9 @@
       "name": "Navigation",
       "kind": "nav",
       "refersTo": "nav-link-current",
-      "description": "Header navigation; the current page sits on School of Science Yellow, hover underlines.",
+      "description": "Header navigation; the current page has a 2px underline, hover a 1px underline.",
       "html": "<nav class=\"ds-nav\"><a href=\"#\">Home</a><a href=\"#\" aria-current=\"page\">Research</a><a href=\"#\">People</a><a href=\"#\">Publications</a><a href=\"#\">News</a></nav>",
-      "css": ".ds-nav { display: flex; flex-wrap: wrap; gap: 4px 36px; font-family: Inter, Arial, sans-serif; font-size: 18px; line-height: 1.65; } .ds-nav a { color: var(--fg, #000); text-decoration: none; } .ds-nav a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; } .ds-nav a[aria-current=\"page\"] { background: var(--accent, #F7E159); color: #000; padding: .2em .45em; margin: 0 -.45em; } .ds-nav a:focus-visible { outline: 2px solid var(--fg, #000); outline-offset: 3px; }"
+      "css": ".ds-nav { display: flex; flex-wrap: wrap; gap: 4px 36px; font-family: Inter, Arial, sans-serif; font-size: 18px; line-height: 1.65; } .ds-nav a { color: var(--fg, #000); text-decoration: none; text-underline-offset: .3em; } .ds-nav a:hover { text-decoration: underline; text-decoration-thickness: 1px; } .ds-nav a[aria-current=\"page\"] { text-decoration: underline; text-decoration-thickness: 2px; } .ds-nav a:focus-visible { outline: 2px solid var(--fg, #000); outline-offset: 3px; }"
     },
     {
       "name": "Mark",
@@ -100,7 +100,7 @@
       "Light and dark themes, switched in the lower right corner."
     ],
     "rules": [
-      { "name": "The Highlighter Rule", "body": "Yellow is a background behind black text, never a text colour, border or fill on its own. If it isn't marking \"you are here\", \"you're pointing at this\" or \"this phrase matters\", it isn't yellow.", "section": "colors" },
+      { "name": "The Highlighter Rule", "body": "Yellow is a background behind black text, never a text colour, border or fill on its own. If it isn't marking \"you're pointing at this\" or \"this phrase matters\", it isn't yellow. The current page in the nav is not yellow, so it never looks like a hovered link.", "section": "colors" },
       { "name": "The Token Rule", "body": "Colours come from the variables at the top of `assets/site.css` (`--bg`, `--fg`, `--muted`, `--accent`, `--line`, `--blank`), redefined for dark mode. Don't write raw hex in a rule, except black text on yellow and the always-dark home page picture.", "section": "colors" },
       { "name": "The Three Sizes Rule", "body": "Page title, section title, body. No small print, captions or labels at a fourth size.", "section": "typography" },
       { "name": "The Sentence Case Rule", "body": "Sentence case everywhere, no UPPER CASE, left-aligned, ragged right. Bold a person's name on its first mention in running text.", "section": "typography" },
