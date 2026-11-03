@@ -1,4 +1,5 @@
-// Home page picture: two 3D models you can turn and zoom, picked with the dots and arrows at the bottom of the picture.
+// Home page picture: 3D models you can turn and zoom, picked with the dots and arrows at the bottom of the picture;
+// the next one comes up by itself every 30 s.
 //   trap:   the dark optical trap, a standing wave whose intensity is drawn as height, with a particle in the dark spot
 //   cavity: molecules between two microcavity mirrors, after the figure in Shishkov et al., PRL 133, 186903 (2024)
 //   bench:  a polariton condensate forming on the optical table as the pump power grows, after Ho et al., arXiv:2601.15080
@@ -102,7 +103,21 @@ function start() {
     }
     media.querySelectorAll(".hero-paper[data-for]").forEach((p) => { p.hidden = p.dataset.for !== name; });
     frame();
+    later();
   }
+
+  // every 30 s the next model comes up, looping back to the first; turning a model or picking one starts the wait again.
+  // It waits while the picture is off screen or the tab is hidden, and with reduced motion it never moves on by itself.
+  const NEXT = 30000;
+  let nextTimer = 0;
+  function later() {
+    clearTimeout(nextTimer);
+    nextTimer = setTimeout(() => {
+      if (!visible || document.hidden || still.matches) return later();
+      show(ORDER[(ORDER.indexOf(shown) + 1) % ORDER.length]);
+    }, NEXT);
+  }
+  controls.addEventListener("start", later);
 
   function resetView() {
     const v = current.view;
