@@ -151,15 +151,19 @@ function start() {
   new ResizeObserver(resize).observe(media);
 
   let t = 0, last = performance.now(), visible = true, raf = 0;
+  // controls.update() fires "change" when the camera moves, and while paused or with reduced motion the
+  // "change" listener draws a frame; the flag stops that frame from calling itself again
+  let drawing = false;
   function frame() {
-    if (!current) return;
-    controls.update(); // may fire "change", whose handler only draws, so the two never call each other
-    draw();
-  }
-  function draw() {
-    if (!current) return;
-    current.update(t);
-    composer.render();
+    if (!current || drawing) return;
+    drawing = true;
+    try {
+      controls.update();
+      current.update(t);
+      composer.render();
+    } finally {
+      drawing = false;
+    }
   }
   function loop(now) {
     raf = 0;
