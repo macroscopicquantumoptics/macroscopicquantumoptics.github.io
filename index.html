@@ -77,7 +77,7 @@
             muted
             loop
             playsinline
-            preload="auto"
+            preload="none"
             poster="assets/hero/dark-trap.jpg"
           >
             <source src="assets/hero/dark-trap.webm" type="video/webm" />
@@ -120,6 +120,19 @@
             <button type="button" data-step="1" aria-label="Next model">
               <svg viewBox="0 0 16 16" aria-hidden="true">
                 <path d="m6 3 5 5-5 5" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="pause"
+              aria-pressed="false"
+              aria-label="Pause the animation"
+            >
+              <svg class="bars" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M5.5 3.5v9M10.5 3.5v9" />
+              </svg>
+              <svg class="play" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M5 3.5v9l7-4.5z" />
               </svg>
             </button>
           </div>
@@ -223,7 +236,7 @@
               </div>
               <figure>
                 <img
-                  src="assets/news/qclm-2026.png"
+                  src="assets/news/qclm-2026.jpg"
                   alt="QCLM II 2026, 3–6 November"
                   width="912"
                   height="513"

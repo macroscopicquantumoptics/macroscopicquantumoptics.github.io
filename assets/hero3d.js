@@ -48,7 +48,11 @@ function start() {
   const camera = new THREE.PerspectiveCamera(32, 16 / 9, 0.1, 200);
 
   const controls = new OrbitControls(camera, canvas);
-  controls.enableDamping = !still.matches;
+  // the pause button stops the animation and the 30 s switch, as reduced motion does, until it is pressed again
+  const pauseButton = picker && picker.querySelector(".pause");
+  let paused = false;
+  const stopped = () => paused || still.matches;
+  controls.enableDamping = !stopped();
   controls.dampingFactor = 0.08;
   controls.rotateSpeed = 0.7;
   controls.zoomSpeed = 0.8;
@@ -113,7 +117,7 @@ function start() {
   function later() {
     clearTimeout(nextTimer);
     nextTimer = setTimeout(() => {
-      if (!visible || document.hidden || still.matches) return later();
+      if (!visible || document.hidden || stopped()) return later();
       show(ORDER[(ORDER.indexOf(shown) + 1) % ORDER.length]);
     }, NEXT);
   }
@@ -155,21 +159,27 @@ function start() {
   }
   function loop(now) {
     raf = 0;
-    if (!visible || document.hidden || still.matches) return;
+    if (!visible || document.hidden || stopped()) return;
     t += Math.min(now - last, 100) / 1000;
     last = now;
     frame();
     raf = requestAnimationFrame(loop);
   }
   function run() {
-    if (!raf && visible && !document.hidden && !still.matches) {
+    if (!raf && visible && !document.hidden && !stopped()) {
       last = performance.now();
       raf = requestAnimationFrame(loop);
     }
   }
   // with reduced motion nothing moves by itself, and the picture redraws only when someone turns it
-  controls.addEventListener("change", () => { if (still.matches) frame(); });
-  still.addEventListener("change", () => { controls.enableDamping = !still.matches; run(); frame(); });
+  controls.addEventListener("change", () => { if (stopped()) frame(); });
+  function setMotion() {
+    controls.enableDamping = !stopped();
+    if (pauseButton) pauseButton.hidden = still.matches; // with reduced motion nothing moves, so there is nothing to pause
+    run();
+    frame();
+  }
+  still.addEventListener("change", setMotion);
   document.addEventListener("visibilitychange", run);
   new IntersectionObserver((e) => { visible = e[0].isIntersecting; run(); }).observe(media);
 
@@ -178,11 +188,18 @@ function start() {
     picker.addEventListener("click", (e) => {
       const b = e.target.closest("button");
       if (!b) return;
+      if (b === pauseButton) {
+        paused = !paused;
+        b.setAttribute("aria-pressed", String(paused));
+        setMotion();
+        return;
+      }
       const step = Number(b.dataset.step) || 0;
       show(b.dataset.scene || ORDER[(ORDER.indexOf(shown) + step + ORDER.length) % ORDER.length]);
     });
   }
 
+  setMotion();
   show("trap"); // draws the first frame
   void canvas.offsetWidth; // settle the canvas at opacity 0 first, so the fade runs
   media.classList.add("live"); // and the picture fades in
