@@ -29,14 +29,14 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { -webkit-text-size-adjust: 100%; }
 body { background: var(--bg); color: var(--fg); font-family: "Inter", Arial, sans-serif;
-  font-size: 18px; line-height: 1.65; }
+  font-size: 1.125rem; line-height: 1.65; } /* 18px; rem so the browser's text-size setting applies */
 img { display: block; max-width: 100%; height: auto; }
 ul { list-style: none; }
 
 /* three sizes only: page title, section title, body */
-h1 { font-size: clamp(40px, 6vw, 72px); line-height: 1.08; font-weight: 700; letter-spacing: -0.025em; }
-h2 { font-size: clamp(26px, 3vw, 32px); line-height: 1.2; font-weight: 700; letter-spacing: -0.025em; }
-h3 { font-size: 18px; line-height: 1.4; font-weight: 700; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.08; font-weight: 700; letter-spacing: -0.025em; }
+h2 { font-size: clamp(1.625rem, 3vw, 2rem); line-height: 1.2; font-weight: 700; letter-spacing: -0.025em; }
+h3 { font-size: 1.125rem; line-height: 1.4; font-weight: 700; letter-spacing: -0.01em; }
 h1, h2, h3 { text-wrap: balance; }
 p { max-width: 64ch; text-wrap: pretty; }
 p + p { margin-top: 1.1em; }
@@ -119,9 +119,15 @@ main:has(> .hero) { padding-top: 40px; }
 .hero-pick[hidden] { display: none; }
 .hero-pick button { display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 0; background: none; color: #FFFFFF; cursor: pointer; }
 .hero-pick svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.hero-pick .dot { width: 20px; }
+/* every button is 32px wide, so neighbouring dots are far enough apart to tap */
 .hero-pick .dot::before { content: ""; width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid #FFFFFF; }
 .hero-pick .dot[aria-pressed="true"]::before { background: #FFFFFF; }
+/* pause button: two bars while the picture moves, a play triangle while it is paused */
+.hero-pick .pause { margin-left: 6px; }
+.hero-pick .pause[hidden] { display: none; }
+.hero-pick .pause .play { display: none; fill: currentColor; }
+.hero-pick .pause[aria-pressed="true"] .play { display: block; }
+.hero-pick .pause[aria-pressed="true"] .bars { display: none; }
 .hero-pick button:hover { color: var(--accent); }
 .hero-pick .dot:hover::before { border-color: var(--accent); }
 .hero-pick button:focus-visible { outline-color: #FFFFFF; }
@@ -151,7 +157,7 @@ main:has(> .hero) { padding-top: 40px; }
 /* news: text on the left, picture on the right */
 .news { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 72px; align-items: start; }
 /* items are h2 on the news page and h3 under "News" on the home page; both at title size */
-.news h2, .news h3 { font-size: 18px; line-height: 1.4; letter-spacing: -0.01em; margin-bottom: 12px; }
+.news h2, .news h3 { font-size: 1.125rem; line-height: 1.4; letter-spacing: -0.01em; margin-bottom: 12px; }
 .news p + p, .news .link { margin-top: 16px; }
 .news:not(:has(figure)) { grid-template-columns: minmax(0, 1fr); }
 .news figcaption { color: var(--muted); margin-top: 8px; }
@@ -214,7 +220,7 @@ main:has(> .hero) { padding-top: 40px; }
 /* ---------- footer ---------- */
 .site-foot { border-top: 1px solid var(--line); padding: 72px 0 96px; color: var(--muted); }
 .site-foot .wrap { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px 64px; }
-.site-foot h2 { font-size: 18px; letter-spacing: -0.01em; color: var(--fg); margin-bottom: 12px; }
+.site-foot h2 { font-size: 1.125rem; letter-spacing: -0.01em; color: var(--fg); margin-bottom: 12px; }
 .site-foot address { font-style: normal; }
 
 /* ---------- narrow screens ---------- */
@@ -226,6 +232,8 @@ main:has(> .hero) { padding-top: 40px; }
   /* phones and tablets: the picture becomes a band under the header and the text sits below it */
   .hero { height: auto; min-height: 0; background: none; color: inherit; }
   .hero-media { position: relative; inset: auto; aspect-ratio: 16 / 9; }
+  /* the paper link moves to the top right so the picker row has the bottom edge to itself */
+  .hero-paper { bottom: auto; top: 12px; }
   .hero .wrap { height: auto; padding-top: 48px; padding-bottom: 0; }
   .news, .tools > .news { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .news figure { max-width: 420px; }
@@ -234,16 +242,20 @@ main:has(> .hero) { padding-top: 40px; }
   .site-foot .wrap { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
-  body { font-size: 17px; }
+  body { font-size: 1.0625rem; } /* 17px */
   .site-head { padding-top: 24px; }
   .aalto { height: 30px; }
   .brand .mqo { height: 37.1px; margin-top: -5.3px; }
   .nav { gap: 4px 20px; }
   main { padding: 72px 0 96px; }
   .site-foot { padding: 56px 0 112px; } /* room for the floating theme switch */
-  /* the dots move to the left so they keep clear of the paper link */
+  /* a smaller switch closer to the corner, so it covers less of the text scrolling under it */
+  .theme-switch { right: 12px; bottom: 12px; width: 56px; height: 28px; border-radius: 14px; }
+  .theme-switch::before { top: 2px; left: 2px; width: 22px; height: 22px; }
+  .theme-switch[aria-checked="true"]::before { transform: translateX(28px); }
+  .theme-switch svg { width: 27px; height: 14px; }
+  /* the picker moves to the left edge, in line with the text below */
   .hero-pick { left: calc(var(--gutter) - 8px); transform: none; bottom: 8px; }
-  .hero-paper { bottom: 12px; }
   .block { margin-top: 96px; }
   .block > h2 { margin-bottom: 32px; }
   .rows > li, .rows > article { padding: 36px 0; }
@@ -251,7 +263,7 @@ main:has(> .hero) { padding-top: 40px; }
   .people { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 20px; }
   .year { grid-template-columns: 1fr; gap: 12px; }
   .year + .year { margin-top: 72px; }
-  h3, .site-foot h2, .news h2 { font-size: 17px; }
+  h3, .site-foot h2, .news h2 { font-size: 1.0625rem; }
 }
 
 @media print {

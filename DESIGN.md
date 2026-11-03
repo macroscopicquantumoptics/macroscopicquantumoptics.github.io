@@ -14,30 +14,36 @@ colors:
 typography:
   display:
     fontFamily: "Inter, Arial, sans-serif"
-    fontSize: "clamp(40px, 6vw, 72px)"
+    fontSize: "clamp(2.5rem, 6vw, 4.5rem)"
     fontWeight: 700
     lineHeight: 1.08
     letterSpacing: "-0.025em"
   headline:
     fontFamily: "Inter, Arial, sans-serif"
-    fontSize: "clamp(26px, 3vw, 32px)"
+    fontSize: "clamp(1.625rem, 3vw, 2rem)"
     fontWeight: 700
     lineHeight: 1.2
     letterSpacing: "-0.025em"
   title:
     fontFamily: "Inter, Arial, sans-serif"
-    fontSize: "18px"
+    fontSize: "1.125rem"
     fontWeight: 700
     lineHeight: 1.4
     letterSpacing: "-0.01em"
   body:
     fontFamily: "Inter, Arial, sans-serif"
-    fontSize: "18px"
+    fontSize: "1.125rem"
+    fontWeight: 400
+    lineHeight: 1.65
+  body-phone:
+    fontFamily: "Inter, Arial, sans-serif"
+    fontSize: "1.0625rem"
     fontWeight: 400
     lineHeight: 1.65
 rounded:
   none: "0"
   switch: "18px"
+  switch-phone: "14px"
 spacing:
   gutter: "clamp(20px, 5vw, 80px)"
   row: "44px"
@@ -174,13 +180,13 @@ Circles appear only where the form is a dot by nature: list bullets (7px), the m
 - **Hover / focus:** contact details appear over the lower edge of the photo on a page-colour strip with a hairline on top. Not shown on touch screens.
 
 ### Theme switch
-- **Place:** fixed in the lower right corner, 72 x 36px pill with a 1px outline in the text colour.
+- **Place:** fixed in the lower right corner, 72 x 36px pill with a 1px outline in the text colour; 56 x 28px and 12px from the corner on phones, so it covers less text.
 - **State:** a School of Science Yellow knob slides under the sun (light) or moon (dark); the active icon is black, the other grey. No motion with reduced motion.
 
 ### Home page picture (signature)
 - **Dark band** (#000 in both themes) holding the 3D models from `assets/hero3d.js`, with the page title and intro over it in white.
-- **Model picker:** arrows either side of one 8px dot per model, centred at the bottom; the shown model's dot is filled. Hover turns them yellow.
-- **Paper link:** grey (#A6A6A6) in the lower right corner, level with the content's right edge.
+- **Model picker:** arrows either side of one 8px dot per model, each in a 32px-wide button so they are easy to tap, centred at the bottom (at the left edge on phones); the shown model's dot is filled. Hover turns them yellow. A pause button at the end of the row stops the animation and the 30 s switch; it is hidden under reduced motion, where nothing moves anyway.
+- **Paper link:** grey (#A6A6A6) in the lower right corner, level with the content's right edge. Under 900px it moves to the top right of the picture, leaving the bottom edge to the picker.
 - **Fallback:** a looping video of the dark trap where WebGL is missing; the model fades in over 0.8s when ready.
 
 ## Do's and Don'ts

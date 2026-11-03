@@ -138,6 +138,9 @@ def main():
             ext = ".png" if data[:4] == b"\x89PNG" else ".jpg"
             name = f"{slug}{ext}"
             (ROOT / "assets/news" / name).write_bytes(data)
+            if len(data) > 200_000:
+                print(f"assets/news/{name} is {len(data) // 1000} KB; AGENTS.md asks for under 200 KB. "
+                      "Save it as a smaller JPEG before merging.", file=sys.stderr)
             alt = alt or "TODO: describe the picture"
             figure = (f'\n        <figure><img src="../assets/news/{name}" alt="{html.escape(alt)}" '
                       f'loading="lazy"></figure>')

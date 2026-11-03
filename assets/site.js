@@ -22,7 +22,7 @@
   mark();
 })();
 
-// Home page without WebGL: the dark-trap video plays, or shows its first frame with reduced motion.
+// Home page without WebGL: the dark-trap video loads and plays, or shows its first frame with reduced motion.
 // hero3d.js marks the picture "live" when the model has drawn, or sends "flat" when it cannot run. The
 // module script sends "flat" too if it fails to load, and old browsers without modules run the nomodule
 // script; as a last resort, if the module has not even started after 15 s, the video takes over.
@@ -37,8 +37,11 @@
     else video.play().catch(function () {});
   }
   function flat() {
-    if (media.classList.contains("live")) return;
+    if (media.classList.contains("live") || media.classList.contains("flat")) return;
     media.classList.add("flat");
+    // the video only downloads now, when it is actually needed (preload="none" in the page)
+    video.preload = "auto";
+    video.load();
     motion();
   }
   media.addEventListener("flat", flat);
