@@ -51,7 +51,7 @@ components:
     textColor: "{colors.ink-black}"
     typography: "{typography.body}"
     rounded: "{rounded.none}"
-    padding: "0 0.25em"
+    padding: "0.2em 0.45em"
   link-hover:
     backgroundColor: "{colors.school-of-science-yellow}"
     textColor: "{colors.ink-black}"
